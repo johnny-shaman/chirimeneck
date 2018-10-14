@@ -1,7 +1,20 @@
 # chirimeneck
-Wrapper class on chirimen for raspberry Pi about navigator.requestXAccess
-
+W rapper class on chirimen for raspberry Pi about navigator.requestXAccess
+ 
 usage:
+
+download this repo and 
+
+~~~html
+  <script src="../../polyfill/polyfill.js"></script>
+  <!-- load driver  as you like -->
+    <script src="../../drivers/i2c-ADT7410.js"></script>
+  <!-- load driver  as you like -->
+  <script src="../../chirimeneck/gpio.js"></script>
+  <script src="../../chirimeneck/i2c.js"></script>
+~~~
+
+javascript
 ~~~javascript
 
 //GPIO
