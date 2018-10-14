@@ -19,6 +19,12 @@ Object.defineProperties(GPIO.prototype, {
       return true;
     }
   },
+  write: {
+    configurable: true,
+    get () {
+      return this.constructor.prototype.gpio.write;
+    }
+  },
   onchange: {
     get () {
       return this.use.onchange;
