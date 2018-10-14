@@ -22,7 +22,7 @@ Object.defineProperties(GPIO.prototype, {
   write: {
     configurable: true,
     get () {
-      return this.constructor.prototype.gpio.write;
+      return this.use.write;
     }
   },
   onchange: {
