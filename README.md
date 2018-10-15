@@ -19,7 +19,7 @@ javascript
 
 //GPIO
 
-async function () {
+(async function () {
   const gpio5 = await new GPIO(5, "in");
   const gpio26 = await new GPIO(26, "out");
   let v = 0
@@ -27,7 +27,7 @@ async function () {
     v ^= v
     await gpio26.write(v);
   };
-}
+})()
 ///I2C
 
 (async function () {
