@@ -27,12 +27,13 @@ javascript
     v ^= v
     await gpio26.write(v);
   };
-})()
+})();
+
 ///I2C
 
 (async function () {
-  const i2c = new I2C();
-  const adt7410 = i2c.loadDriver(ADT7410, 0x48);
+  const i2c = await new I2C();
+  const adt7410 = await i2c.loadDriver(ADT7410, 0x48);
   await adt7410.init()
   while (true) {
     let value = await adt7410.read();
@@ -42,8 +43,8 @@ javascript
 })();
 
 (async function () {
-  const i2c = new I2C();
-  const groveLight = i2c.loadDriver(GROVELIGHT, 0x29);
+  const i2c = await new I2C();
+  const groveLight = await i2c.loadDriver(GROVELIGHT, 0x29);
   await groveLight.init()
   while (true) {
     try {
