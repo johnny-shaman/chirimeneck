@@ -21,8 +21,8 @@ Object.defineProperties(GPIO.prototype, {
   },
   write: {
     configurable: true,
-    get () {
-      return this.use.write;
+    async get () {
+      return await this.use.write;
     }
   },
   onchange: {

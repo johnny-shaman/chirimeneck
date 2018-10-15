@@ -19,16 +19,15 @@ javascript
 
 //GPIO
 
-const gpio5 = new GPIO(5, "in");
-const gpio26 = new GPIO(26, "out");
-
-gpio5.onchange = function (e) {
-  // any you want
-};
-
-gpio26.write(1);
-
-
+async function () {
+  const gpio5 = await new GPIO(5, "in");
+  const gpio26 = await new GPIO(26, "out");
+  let v = 0
+  gpio5.onchange = function (e) {
+    v ^= v
+    await gpio26.write(v);
+  };
+}
 ///I2C
 
 (async function () {
@@ -40,6 +39,21 @@ gpio26.write(1);
     // do somthing
     await sleep(1000);
   }
-})()
-;
+})();
+
+(async function () {
+  const i2c = new I2C();
+  const groveLight = i2c.loadDriver(GROVELIGHT, 0x29);
+  await groveLight.init()
+  while (true) {
+    try {
+      var value = await groveLight.read();
+      // console.log('value:', value);
+      head.innerHTML = value ? value : head.innerHTML;
+      await sleep(200);
+    } catch (error) {
+      console.log(" Error : ", error);
+    }
+  }
+})();
 ~~~
