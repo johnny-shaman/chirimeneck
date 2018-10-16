@@ -15,7 +15,7 @@ Object.defineProperties(GPIO.prototype, {
       return await this["@gpio"];
     },
     set (v) {
-      this.constructor.prototype.gpio = v;
+      this.constructor.prototype["@gpio"] = v;
       return true;
     }
   },

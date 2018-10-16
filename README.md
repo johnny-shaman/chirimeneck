@@ -19,7 +19,7 @@ javascript
 
 //GPIO
 
-const sleep = ms => setTimeout(p => new Promise(), ms)
+const wait = ms => setTimeout(p => new Promise(), ms);
 
 (async function () {
   const gpio5 = await new GPIO(5, "in");
@@ -40,7 +40,7 @@ const sleep = ms => setTimeout(p => new Promise(), ms)
   while (true) {
     let value = await adt7410.read();
     // do somthing
-    await sleep(1000);
+    await wait(1000);
   }
 })();
 
@@ -53,7 +53,7 @@ const sleep = ms => setTimeout(p => new Promise(), ms)
       var value = await groveLight.read();
       // console.log('value:', value);
       head.innerHTML = value ? value : head.innerHTML;
-      await sleep(200);
+      await wait(200);
     } catch (error) {
       console.log(" Error : ", error);
     }
