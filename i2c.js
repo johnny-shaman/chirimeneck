@@ -10,8 +10,8 @@ Object.defineProperties(I2C.prototype, {
   },
   use: {
     configurable: true,
-    get () {
-      return this.constructor.prototype.i2c;
+    async get () {
+      return await this.constructor.prototype.i2c;
     },
     set (v) {
       this.constructor.prototype.i2c = v;
@@ -20,8 +20,8 @@ Object.defineProperties(I2C.prototype, {
   },
   loadDriver: {
     configurable: true,
-    value (driver, address) {
-      return new driver(this.use, address);
+    async value (driver, address) {
+      return await new driver(this.use, address);
     }
   },
   slaving: {
