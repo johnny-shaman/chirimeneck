@@ -3,7 +3,7 @@ let I2C = function () {
 };
 
 Object.defineProperties(I2C.prototype, {
-  port: {
+  "@i2c": {
     configurable: true,
     writable: true,
     value: false
@@ -11,7 +11,7 @@ Object.defineProperties(I2C.prototype, {
   use: {
     configurable: true,
     async get () {
-      return await this.constructor.prototype.i2c;
+      return await this["@i2c"];
     },
     set (v) {
       this.constructor.prototype.i2c = v;
@@ -26,7 +26,7 @@ Object.defineProperties(I2C.prototype, {
   },
   slaving: {
     async value (address) {
-      return await this.use.open(address);
+      return (await this.use).open(address);
     }
   }
 });

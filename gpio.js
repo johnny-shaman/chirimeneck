@@ -1,18 +1,18 @@
 let GPIO = function (port, io) {
-  this.use = GPIO.prototype.use = GPIO.prototype.use || navigator.requestGPIOAccess();
-  this.use.then(gpio => gpio.ports.get(port)).then(p => p.export(io));
+  this.gpio = this.gpio || navigator.requestGPIOAccess();
+  this.gpio.then(gpio => gpio.ports.get(port)).then(p => p.export(io));
 };
 
 Object.defineProperties(GPIO.prototype, {
-  gpio: {
+  "@gpio": {
     configurable: true,
     writable: true,
     value: false
   },
-  use: {
+  gpio: {
     configurable: true,
     async get () {
-      return await this.constructor.prototype.gpio;
+      return await this["@gpio"];
     },
     set (v) {
       this.constructor.prototype.gpio = v;
@@ -22,15 +22,15 @@ Object.defineProperties(GPIO.prototype, {
   write: {
     configurable: true,
     async get () {
-      return await this.use.write;
+      return (await this.gpio).write;
     }
   },
   onchange: {
     async get () {
-      return await this.use.onchange;
+      return (await this.gpio).onchange;
     },
     set (f) {
-      this.use.onchange = f;
+      this.gpio.onchange = f;
       return true;
     }
   }

@@ -19,12 +19,14 @@ javascript
 
 //GPIO
 
+const sleep = ms => setTimeout(p => new Promise(), ms)
+
 (async function () {
   const gpio5 = await new GPIO(5, "in");
   const gpio26 = await new GPIO(26, "out");
-  let v = 0
-  gpio5.onchange = function (e) {
-    v ^= v
+  let v = 0;
+  await gpio5.onchange = function (e) {
+    v ^= v;
     await gpio26.write(v);
   };
 })();
