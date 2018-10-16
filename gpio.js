@@ -11,8 +11,8 @@ Object.defineProperties(GPIO.prototype, {
   },
   use: {
     configurable: true,
-    get () {
-      return this.constructor.prototype.gpio;
+    async get () {
+      return await this.constructor.prototype.gpio;
     },
     set (v) {
       this.constructor.prototype.gpio = v;
@@ -26,8 +26,8 @@ Object.defineProperties(GPIO.prototype, {
     }
   },
   onchange: {
-    get () {
-      return this.use.onchange;
+    async get () {
+      return await this.use.onchange;
     },
     set (f) {
       this.use.onchange = f;
