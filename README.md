@@ -1,6 +1,5 @@
-# chirimeneck
-W rapper class on chirimen for raspberry Pi about navigator.requestXAccess
- 
+# Chirimeneck
+Chirimeneck is Chirimen for raspberry Pi functional on navigator.requestXAccess 
 usage:
 
 download this repo and 
