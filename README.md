@@ -17,13 +17,12 @@ download this repo and
 javascript
 ~~~javascript
 
+'use strict';
+
 //GPIO
-
-const wait = ms => setTimeout(p => new Promise(), ms);
-
-(async function () {
-  const gpio5 = await new GPIO(5, "in");
-  const gpio26 = await new GPIO(26, "out");
+(async function gpioFunction () {
+  const gpio5  = await GPIO(5, "in");
+  const gpio26 = await GPIO(26, "out");
   let v = 0;
   await gpio5.onchange = function (e) {
     v ^= v;
@@ -32,31 +31,23 @@ const wait = ms => setTimeout(p => new Promise(), ms);
 })();
 
 ///I2C
-
-(async function () {
-  const i2c = await new I2C();
-  const adt7410 = await i2c.loadDriver(ADT7410, 0x48);
-  await adt7410.init()
-  while (true) {
-    let value = await adt7410.read();
-    // do somthing
-    await wait(1000);
-  }
-})();
-
-(async function () {
-  const i2c = await new I2C();
-  const groveLight = await i2c.loadDriver(GROVELIGHT, 0x29);
-  await groveLight.init()
-  while (true) {
-    try {
-      var value = await groveLight.read();
+(async function i2cFunction() {
+  try {
+    var adt7410 = await i2cLoadDriver(ADT7410, 0x48);
+    while (1) {
+      var value = await adt7410.read();
       // console.log('value:', value);
       head.innerHTML = value ? value : head.innerHTML;
-      await wait(200);
-    } catch (error) {
-      console.log(" Error : ", error);
+      await sleep(1000);
     }
+  } catch (error) {
+    console.error("error", error);
   }
+}
+
+function sleep(ms) {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, ms);
+  });
 })();
 ~~~
